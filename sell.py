@@ -7,9 +7,11 @@ sheet_obj = wb_obj.active
 new_obj = load_workbook("Sell_products_baza.xlsx")
 new_sheet = new_obj.active
 
+#### Products bazaniki bula
 m_row = sheet_obj.max_row
 max_col = sheet_obj.max_column
 
+#### Sell products bazaniki
 new_max_row = new_sheet.max_row
 
 sell_products_list = []

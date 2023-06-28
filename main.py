@@ -1,6 +1,8 @@
 from openpyxl import load_workbook
 from date import now_day, now_month, now_year
 from sell import product_sell
+from view import view_baza
+
 wb = load_workbook("products_baza.xlsx")
 sheet = wb.active
 
@@ -18,7 +20,7 @@ def add_product():
     product_ish_sanasi = input("Mahsulotni ishlab chiqarilgan sanasi: ")
     product_saqlash_muddati = input("Mahsulotni saqlash muddati: ")
     all_price = int(product_count) * int(product_price)
-    #### User kiritgan mahsulotlarni dict ga oldib qoshdik
+    #### User kiritgan mahsulotlarni dict ga olib qoshdik
     product_dict = {
         "name": product_name.title(),
         "count": product_count,
@@ -36,9 +38,6 @@ def add_product():
     if yana_qosh == "1":
         add_product()
 
-    #### Agar oldindan mahsulot bolsa shuni udate qilamiz
-    
-    
     #### User kiritgan mahsulotlarni excel ga yozdik
     number = 0
     id = sheet.max_row + 1
@@ -55,11 +54,13 @@ def add_product():
         number += 1
 
 def choice():
-    savol = input("Mahsulot qo'shish (1): \nMahsulot sotish (2): ")
+    savol = input("Mahsulot qo'shish (1): \nMahsulot sotish (2): \nMahsulotlarni korish (3): ")
     if savol == "1":
         add_product()
         add_func()
     elif savol == "2":
         product_sell()
+    elif savol == "3":
+        view_baza()
         
 choice()
