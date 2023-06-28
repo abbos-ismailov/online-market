@@ -8,3 +8,6 @@ def qrCode():
     
     # Saving as an image file
     img.save('QR Code products_baza.png')
+    
+    
+    
