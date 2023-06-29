@@ -15,7 +15,7 @@ def qrCode():
     import qrcode
     
     # Data to be encoded
-    data = f'https://github.com/abbos-ismailov/online-market/blob/master/Report%20{sana_inp}.txt'
+    data = f'https://github.com/abbos-ismailov/online-market/blob/master/Report%20{sana_inp}.doc'
     
     # Encoding data using make() function
     img = qrcode.make(data)
@@ -52,10 +52,6 @@ def report():
             text = f"""{product_name_list[i]}     {all_price_list[i]}     {product_count_list[i]}     {product_quantity_list[i]}     {ish_sanasi_list[i]}"""
             f.write(text)
             f.write('\n')
-    with open(f'Report {sana_inp}.txt', 'w') as f:
-        for i in range(len(product_name_list)):
-            text = f"""{product_name_list[i]}     {all_price_list[i]}     {product_count_list[i]}     {product_quantity_list[i]}     {ish_sanasi_list[i]}"""
-            f.write(text)
-            f.write('\n')
+    
     qrCode()
 report()

@@ -2,6 +2,7 @@ from openpyxl import load_workbook
 from date import now_day, now_month, now_year
 from sell import product_sell
 from view import view_baza
+from report import report
 
 wb = load_workbook("products_baza.xlsx")
 sheet = wb.active
@@ -54,7 +55,7 @@ def add_product():
         number += 1
 
 def choice():
-    savol = input("Mahsulot qo'shish (1): \nMahsulot sotish (2): \nMahsulotlarni korish (3): ")
+    savol = input("Mahsulot qo'shish (1): \nMahsulot sotish (2): \nMahsulotlarni korish (3): \nXisobot (4): ")
     if savol == "1":
         add_product()
         add_func()
@@ -62,5 +63,6 @@ def choice():
         product_sell()
     elif savol == "3":
         view_baza()
-        
+    elif savol == "4":
+        report()
 choice()
