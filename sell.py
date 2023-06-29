@@ -7,15 +7,17 @@ sheet_obj = wb_obj.active
 new_obj = load_workbook("Sell_products_baza.xlsx")
 new_sheet = new_obj.active
 
+sell_wb = load_workbook(f"Sell_products_baza {now_day()}-{now_month()}-{now_year()}.xlsx")
+sell_sheet = sell_wb.active
 #### Products bazaniki bula
 m_row = sheet_obj.max_row
 max_col = sheet_obj.max_column
 
 #### Sell products bazaniki
-new_max_row = new_sheet.max_row
+new_max_row = sell_sheet.max_row
 
 sell_products_list = []
-
+print(new_max_row)
 def product_sell():
     product_name_list = []
     product_miq_list = []
@@ -56,12 +58,12 @@ def product_sell():
     
     #### Bu yerda hisob kitob ishlari olib borildi
     for i in range(len(product_name_list)):
-        if sot_mah.title() == product_name_list[i].title() and sot_mah_miqdori >= int(product_miq_list[i]) and str(product_quantity_list[i] == sot_mah_bittasini_miq):
+        if sot_mah.title() == product_name_list[i] and int(sot_mah_miqdori) <= int(product_miq_list[i]) and sot_mah_bittasini_miq == str(product_quantity_list[i]):
             qolgan_mah_miq = int(product_miq_list[i]) - int(sot_mah_miqdori)
             
             all_price_list[i] = all_price_list[i] - (int(sot_mah_miqdori) * int(product_price_list[i]))
             product_miq_list[i] = qolgan_mah_miq
-            
+            print("In coming...")
             sell_product_dict = {
                 "name": sot_mah,
                 "quantity": sot_mah_bittasini_miq,
@@ -71,11 +73,12 @@ def product_sell():
             }
             sell_products_list.append(sell_product_dict)
             break
+        else:
+            print("Elsega tushdi")
         
             
     #### Bu yerda ozgarishlarni yozib qoydik eski filega
     order = 0
-    id = new_max_row + 1
     for i in range(2, len(product_miq_list) + 2):
         sheet_obj[f"C{i}"].value = product_miq_list[order]
         sheet_obj[f"H{i}"].value = all_price_list[order]
@@ -87,7 +90,11 @@ def product_sell():
         product_sell() 
     #### Yangi excel file ga yozyapmiz 
     number = 0
-    
+    try:
+        id = new_max_row + 1
+    except:
+        id = 2
+    print(id , "-> Bu id")
     for i in range(id, len(sell_products_list)+id):
         new_sheet[f"A{i}"].value = sell_products_list[number]["name"].title()
         new_sheet[f"B{i}"].value = sell_products_list[number]["qancha_pul"]
