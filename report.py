@@ -15,7 +15,7 @@ def qrCode():
     import qrcode
     
     # Data to be encoded
-    data = f'https://github.com/abbos-ismailov/online-market/blob/master/Report {sana_inp}.txt'
+    data = f'https://github.com/abbos-ismailov/online-market/blob/master/Report%20{sana_inp}.txt'
     
     # Encoding data using make() function
     img = qrcode.make(data)
