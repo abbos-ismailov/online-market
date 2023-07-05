@@ -16,7 +16,7 @@ def add_product():
     product_name = input("Mahsulotni nomini kiriting: ")
     product_count = input("Mahsulot soni: ")
     quantity_type = input("Qanday sotiladi (kg, dona, litr): ")
-    product_quantity = input("Bir donasini miqdori: ")
+    product_quantity = input("Bir donasini miqdori yoki kg da sotilsa (1 kg): ")
     product_price = input("Mahsulot narxi: ")
     product_ish_sanasi = input("Mahsulotni ishlab chiqarilgan sanasi: ")
     product_saqlash_muddati = input("Mahsulotni saqlash muddati: ")
@@ -42,7 +42,6 @@ def add_product():
     #### User kiritgan mahsulotlarni excel ga yozdik
     number = 0
     id = sheet.max_row + 1
-    print(id)
     for i in range(id, len(products)+id):
         sheet[f"A{i}"].value = id - 1
         sheet[f"B{i}"].value = products[number]["name"]

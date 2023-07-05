@@ -1,29 +1,17 @@
 from openpyxl import load_workbook
 from date import now_day, now_month, now_year
-
-sana_inp = input("Qaysi sanadagi sotilgan mahsulotlar kerak? ")
-try:
-    wb_obj = load_workbook(f"Sell_products_baza {sana_inp}.xlsx") 
-    sheet_obj = wb_obj.active
-except:
-    print("Bunday sanada sotilmagan...")
-
-m_row = sheet_obj.max_row
-
-def qrCode():
-    # Importing library
-    import qrcode
-    
-    # Data to be encoded
-    data = f'https://github.com/abbos-ismailov/online-market/blob/master/Report%20{sana_inp}.doc'
-    
-    # Encoding data using make() function
-    img = qrcode.make(data)
-    
-    # Saving as an image file
-    img.save(f'Report {sana_inp}.png')
+import qrcode
 
 def report():
+    sana_inp = input("Qaysi sanadagi sotilgan mahsulotlar kerak? ")
+    try:
+        wb_obj = load_workbook(f"Sell_products_baza {sana_inp}.xlsx") 
+        sheet_obj = wb_obj.active
+    except:
+        print("Bunday sanada sotilmagan...")
+
+    m_row = sheet_obj.max_row
+    
     product_name_list = []
     product_count_list = []
     product_quantity_list = []
@@ -53,5 +41,6 @@ def report():
             f.write(text)
             f.write('\n')
     
-    qrCode()
-report()
+    data = f'https://github.com/abbos-ismailov/online-market/blob/master/Report%20{sana_inp}.doc'
+    img = qrcode.make(data)
+    img.save(f'Report {sana_inp}.png')

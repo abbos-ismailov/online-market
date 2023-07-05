@@ -4,11 +4,15 @@ from date import now_day, now_month, now_year
 wb_obj = load_workbook("products_baza.xlsx") 
 sheet_obj = wb_obj.active
 
-new_obj = load_workbook("Sell_products_baza.xlsx")
-new_sheet = new_obj.active
-
-sell_wb = load_workbook(f"Sell_products_baza {now_day()}-{now_month()}-{now_year()}.xlsx")
-sell_sheet = sell_wb.active
+try:
+    global sell_wb, sell_sheet
+    sell_wb = load_workbook(f"Sell_products_baza {now_day()}-{now_month()}-{now_year()}.xlsx")
+    sell_sheet = sell_wb.active
+except:
+    global new_sheet
+    sell_wb = load_workbook("Sell_products_baza.xlsx")
+    sell_sheet = sell_wb.active
+    
 #### Products bazaniki bula
 m_row = sheet_obj.max_row
 max_col = sheet_obj.max_column
@@ -53,7 +57,7 @@ def product_sell():
     
     global sot_mah, sot_mah_bittasini_miq, sot_mah_bittasini_miq, sot_mah_miqdori        
     sot_mah = input("Sotiladigan mahsulot nomi: ")
-    sot_mah_bittasini_miq = input("Sotiladigan mahsulotni sotiladigan hajmi: ")
+    sot_mah_bittasini_miq = input("Sotiladigan mahsulotni sotiladigan hajmi (1 kg/1 litr/ 1 dona): ")
     sot_mah_miqdori = int(input("Qancha sotmoqchisiz: "))
     
     #### Bu yerda hisob kitob ishlari olib borildi
@@ -96,12 +100,12 @@ def product_sell():
         id = 2
     print(id , "-> Bu id")
     for i in range(id, len(sell_products_list)+id):
-        new_sheet[f"A{i}"].value = sell_products_list[number]["name"].title()
-        new_sheet[f"B{i}"].value = sell_products_list[number]["qancha_pul"]
-        new_sheet[f"C{i}"].value = sell_products_list[number]["sot_mah_miqdori"]
-        new_sheet[f"D{i}"].value = sell_products_list[number]["quantity"]
-        new_sheet[f"E{i}"].value = sell_products_list[number]["time"]
+        sell_sheet[f"A{i}"].value = sell_products_list[number]["name"].title()
+        sell_sheet[f"B{i}"].value = sell_products_list[number]["qancha_pul"]
+        sell_sheet[f"C{i}"].value = sell_products_list[number]["sot_mah_miqdori"]
+        sell_sheet[f"D{i}"].value = sell_products_list[number]["quantity"]
+        sell_sheet[f"E{i}"].value = sell_products_list[number]["time"]
         number += 1
     #### Bu yerda excel fileni saqladik
     wb_obj.save(f"products_baza.xlsx")
-    new_obj.save(f"Sell_products_baza {now_day()}-{now_month()}-{now_year()}.xlsx")
+    sell_wb.save(f"Sell_products_baza {now_day()}-{now_month()}-{now_year()}.xlsx")
