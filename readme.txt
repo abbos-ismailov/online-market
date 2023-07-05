@@ -1,4 +1,1 @@
-Readme
-Python
-abbos
-zorku
+
