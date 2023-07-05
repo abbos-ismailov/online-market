@@ -1,6 +1,6 @@
 from openpyxl import load_workbook
 from date import now_day, now_month, now_year
-wb = load_workbook("products_baza.xlsx")
+wb = load_workbook("./excel files/products_baza.xlsx")
 sheet_obj = wb.active
 
 m_row = sheet_obj.max_row

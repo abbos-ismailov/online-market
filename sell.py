@@ -1,7 +1,7 @@
 from openpyxl import load_workbook
 from date import now_day, now_month, now_year
 
-wb_obj = load_workbook("products_baza.xlsx") 
+wb_obj = load_workbook("./excel files/products_baza.xlsx") 
 sheet_obj = wb_obj.active
 
 try:
@@ -21,7 +21,6 @@ max_col = sheet_obj.max_column
 new_max_row = sell_sheet.max_row
 
 sell_products_list = []
-print(new_max_row)
 def product_sell():
     product_name_list = []
     product_miq_list = []
@@ -87,18 +86,13 @@ def product_sell():
         sheet_obj[f"C{i}"].value = product_miq_list[order]
         sheet_obj[f"H{i}"].value = all_price_list[order]
         order += 1
-    
     #### Bu yerda yana soraldi yana sotiladimi yoki sotilmaydimi
     que_cont = input("Yana sotamizmi (1/0): ")
     if que_cont == "1":
         product_sell() 
     #### Yangi excel file ga yozyapmiz 
     number = 0
-    try:
-        id = new_max_row + 1
-    except:
-        id = 2
-    print(id , "-> Bu id")
+    id = new_max_row + 1
     for i in range(id, len(sell_products_list)+id):
         sell_sheet[f"A{i}"].value = sell_products_list[number]["name"].title()
         sell_sheet[f"B{i}"].value = sell_products_list[number]["qancha_pul"]
@@ -107,5 +101,5 @@ def product_sell():
         sell_sheet[f"E{i}"].value = sell_products_list[number]["time"]
         number += 1
     #### Bu yerda excel fileni saqladik
-    wb_obj.save(f"products_baza.xlsx")
+    wb_obj.save(f"./excel files/products_baza.xlsx")
     sell_wb.save(f"Sell_products_baza {now_day()}-{now_month()}-{now_year()}.xlsx")
